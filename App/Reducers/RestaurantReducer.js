@@ -14,7 +14,6 @@ const setUserLocation = (state, action) =>
     userLocation: action.userLocation
   })
 
-
 // map our types to our handlers
 const ACTION_HANDLERS = {
   [Types.SET_USER_LOCATION]: setUserLocation,

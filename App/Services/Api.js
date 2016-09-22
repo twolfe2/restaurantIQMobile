@@ -3,7 +3,7 @@ import apisauce from 'apisauce'
 import Reactotron from 'reactotron'
 
 // our "constructor"
-const create = (baseURL = 'http://openweathermap.org/data/2.1') => {
+const create = (baseURL = 'https://restaurant-server.herokuapp.com/api') => {
   // ------
   // STEP 1
   // ------
@@ -42,7 +42,18 @@ const create = (baseURL = 'http://openweathermap.org/data/2.1') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const getCity = (city) => api.get('/find/name', {q: city})
+  const getRestaurants = (searchObj) => api.get('/restaurants', searchObj)
+  const getYelpInfo = (id) => {
+    api.get(`/details/getYelp/${id}`)
+      .then(res => {
+        const yelpId = res.data[0].url.split('/')[4]
+        return api.get(`/details/yelp/${yelpId}`)
+      })
+    }
+  const getCrosswalk = (id) => api.get(`/details/crosswalk/${id}`);
+
+  const getOneRestaurant = (id) => api.get(`/restaurants/${id}`);
+
 
   // ------
   // STEP 3
@@ -58,7 +69,10 @@ const create = (baseURL = 'http://openweathermap.org/data/2.1') => {
   //
   return {
     // a list of the API functions from step 2
-    getCity,
+    getRestaurants,
+    getYelpInfo,
+    getCrosswalk,
+    getOneRestaurant,
     // additional utilities
     addMonitor
   }
