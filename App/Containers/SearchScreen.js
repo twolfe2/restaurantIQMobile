@@ -33,6 +33,7 @@ class SearchScreen extends React.Component {
     const { latitude, longitude } = this.props.userLocation.coords
     let searchObj = { q: this.state.q, currLocation: { latitude , longitude  }}
     this.props.getRestaurants(searchObj)
+    this.props.restaurantsView()
 
 
   }
@@ -48,7 +49,7 @@ class SearchScreen extends React.Component {
                     <ListItem>
                       <InputGroup>
                         <Icon name='ios-restaurant-outline' />
-                        <Input placeholder='Enter a resturant name or cuisene' onChangeText={q => this.setState({q})}/>
+                        <Input placeholder='Enter a restaurant name or cuisene' onChangeText={q => this.setState({q})}/>
                       </InputGroup>
                     </ListItem>
                   <ListItem>
@@ -77,7 +78,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setUserLocation: (userLocation) => dispatch(Actions.setUserLocation(userLocation)),
-    getRestaurants: (searchObj) => dispatch(Actions.restaurantsRequest(searchObj))
+    getRestaurants: (searchObj) => dispatch(Actions.restaurantsRequest(searchObj)),
+    restaurantsView: NavigationActions.restaurantsView
   }
 }
 
