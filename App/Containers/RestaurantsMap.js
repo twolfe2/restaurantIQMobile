@@ -31,14 +31,12 @@ class MapviewExample extends React.Component {
     * a latitude and longitude as well as any additional information you wish to display.
     *************************************************************/
     const locations = this.props.restaurants
-    console.log('locations', locations);
     /* ***********************************************************
     * STEP 2
     * Set your initial region either by dynamically calculating from a list of locations (as below)
     * or as a fixed point, eg: { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
     *************************************************************/
     const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
-    console.log('region', region);
     this.state = {
       region,
       locations,
@@ -89,10 +87,10 @@ class MapviewExample extends React.Component {
     * Customize the appearance and location of the map marker.
     * Customize the callout in ../Components/MapCallout.js
     *************************************************************/
-
+    // <MapCallout location={location} onPress={this.calloutPress} /> 
     return (
-      <MapView.Marker key={location.name} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
-        <MapCallout location={location} onPress={this.calloutPress} />
+      <MapView.Marker key={location.name} title={location.name} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        
       </MapView.Marker>
     )
   }
