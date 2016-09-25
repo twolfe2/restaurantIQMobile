@@ -19,6 +19,9 @@ const receiveTemperatureFailure = () => ({ type: Types.TEMPERATURE_FAILURE })
 
 const setUserLocation = (userLocation) => ({type: Types.SET_USER_LOCATION, userLocation})
 
+const restaurantsRequest = (searchObj) => ({type: Types.RESTAURANTS_REQUEST, searchObj})
+const receiveRestaurants = (restaurants) => ({type: Types.RECEIVE_RESTAURANTS, restaurants})
+const receiveRestaurantsFailure = () => ({type: Types.RESTAURANTS_FAILURE})
 /**
  Makes available all the action creators we've created.
  */
@@ -31,5 +34,8 @@ export default {
   requestTemperature,
   receiveTemperature,
   receiveTemperatureFailure,
-  setUserLocation
+  setUserLocation, 
+  restaurantsRequest,
+  receiveRestaurants,
+  receiveRestaurantsFailure
 }

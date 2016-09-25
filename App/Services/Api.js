@@ -42,7 +42,7 @@ const create = (baseURL = 'https://restaurant-server.herokuapp.com/api') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const getRestaurants = (searchObj) => api.get('/restaurants', searchObj)
+  const getRestaurants = (searchObj) => api.post('/restaurants', searchObj)
   const getYelpInfo = (id) => {
     api.get(`/details/getYelp/${id}`)
       .then(res => {

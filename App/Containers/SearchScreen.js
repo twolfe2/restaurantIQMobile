@@ -14,6 +14,10 @@ class SearchScreen extends React.Component {
 
   constructor (props) {
     super(props)
+
+    this.state = {
+      q: ''
+    }
     
   }
   componentDidMount() {
@@ -25,46 +29,55 @@ class SearchScreen extends React.Component {
     )
   }
 
+  searchHandler() {
+    const { latitude, longitude } = this.props.userLocation.coords
+    let searchObj = { q: this.state.q, currLocation: { latitude , longitude  }}
+    this.props.getRestaurants(searchObj)
+
+
+  }
+
   render () {
     return (
       <View style={styles.container}>
          <Container>
-                  <Content>
-                  <Card>
-                        <CardItem>   
-                      <List>
-                          <ListItem>
-                              <InputGroup>
-                                  <Icon name='ios-restaurant-outline' />
-                                  <Input placeholder='Enter a resturant name or cuisene' />
-                              </InputGroup>
-                          </ListItem>
-                      
-                          <ListItem>
-                              <InputGroup>
-                                  <Icon name='ios-navigate-outline' />
-                                  <Input placeholder='Enter a location' secureTextEntry={true}/>
-                              </InputGroup>
-                          </ListItem>
-                        </List>
-                        <Button block>Search</Button>
-                      </CardItem>
-                    </Card>
-                  </Content>
-              </Container>
-        </View>
+            <Content>
+              <Card>
+                <CardItem>   
+                  <List>
+                    <ListItem>
+                      <InputGroup>
+                        <Icon name='ios-restaurant-outline' />
+                        <Input placeholder='Enter a resturant name or cuisene' onChangeText={q => this.setState({q})}/>
+                      </InputGroup>
+                    </ListItem>
+                  <ListItem>
+                    <InputGroup>
+                      <Icon name='ios-navigate-outline' disabled/>
+                      <Input placeholder='Using your current location'  />
+                    </InputGroup>
+                  </ListItem>
+                </List>
+                <Button block onPress={() => this.searchHandler()}>Search</Button>
+              </CardItem>
+            </Card>
+          </Content>
+        </Container>
+      </View>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    userLocation: state.restaurant.userLocation
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUserLocation: (userLocation) => dispatch(Actions.setUserLocation(userLocation))
+    setUserLocation: (userLocation) => dispatch(Actions.setUserLocation(userLocation)),
+    getRestaurants: (searchObj) => dispatch(Actions.restaurantsRequest(searchObj))
   }
 }
 
