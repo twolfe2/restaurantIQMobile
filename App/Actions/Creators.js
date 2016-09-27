@@ -22,6 +22,8 @@ const setUserLocation = (userLocation) => ({type: Types.SET_USER_LOCATION, userL
 const restaurantsRequest = (searchObj) => ({type: Types.RESTAURANTS_REQUEST, searchObj})
 const receiveRestaurants = (restaurants) => ({type: Types.RECEIVE_RESTAURANTS, restaurants})
 const receiveRestaurantsFailure = () => ({type: Types.RESTAURANTS_FAILURE})
+
+const restaurantSelect = (restaurantObj) => ({type: Types.RESTAURANT_SELECT, restaurantObj})
 /**
  Makes available all the action creators we've created.
  */
@@ -37,5 +39,6 @@ export default {
   setUserLocation, 
   restaurantsRequest,
   receiveRestaurants,
-  receiveRestaurantsFailure
+  receiveRestaurantsFailure,
+  restaurantSelect
 }

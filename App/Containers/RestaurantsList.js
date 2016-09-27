@@ -1,20 +1,21 @@
 import React from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, Text, ListView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Actions from '../Actions/Creators'
+import { Button } from 'native-base';
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import AlertMessage from '../Components/AlertMessageComponent'
 
 // Styles
-import styles from './Styles/ListviewExampleStyle'
+import styles from './Styles/RestaurantsListStyle'
 
 class RestaurantsList extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {}
-    const rowHasChanged = (r1, r2) => r1 !== r2
+    const rowHasChanged = (r1, r2) => r1.factual_id !== r2.factual_id
 
     // DataSource configured
     const ds = new ListView.DataSource({rowHasChanged})
@@ -23,13 +24,17 @@ class RestaurantsList extends React.Component {
     this.state = {
       dataSource: ds.cloneWithRows(restaurants)
     }
+    this._renderRow = this._renderRow.bind(this)
+  }
+  restaurantClicked(restaurantData) {
+    console.log('clicked', restaurantData );
   }
   _renderRow (rowData) {
     return (
-      <View style={styles.row}>
+      <TouchableOpacity style={styles.row} onPress={() => this.props.restaurantSelected(rowData)}>
         <Text style={styles.boldLabel}>{rowData.name}</Text>
         <Text style={styles.label}>{rowData.rating}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
   _noRowData () {
@@ -58,6 +63,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    restaurantSelected: (restaurantObj) => dispatch(Actions.restaurantSelect(restaurantObj))
   }
 }
 

@@ -37,13 +37,18 @@ const restaurantsRequest = (state, action) =>
     loading: true
   })
 
+const restaurantSelect = (state, action) => 
+  state.merge({
+    currRestaurant: action.restaurantObj
+  })
 
 // map our types to our handlers
 const ACTION_HANDLERS = {
   [Types.SET_USER_LOCATION]: setUserLocation,
   [Types.RECEIVE_RESTAURANTS]: receiveRestaurants,
   [Types.RESTAURANTS_REQUEST]: restaurantsRequest,
-  [Types.RESTAURANTS_FAILURE]: receiveRestaurantsFailure
+  [Types.RESTAURANTS_FAILURE]: receiveRestaurantsFailure,
+  [Types.RESTAURANT_SELECT]: restaurantSelect
 }
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS)

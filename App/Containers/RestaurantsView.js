@@ -6,6 +6,7 @@ import Actions from '../Actions/Creators'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import RestaurantsList from './RestaurantsList'
 import RestaurantsMap from './RestaurantsMap'
+import myTheme from '../Themes/NativeBase/myTheme'
 
 // Styles
 import styles from './Styles/RestaurantsViewStyle'
@@ -22,12 +23,12 @@ class RestaurantsView extends React.Component {
     let output = <Content><Spinner color='blue' /></Content>
     if(!loading) {
       output = (
-        <View>
-          <Tabs>
-            <Content  tabLabel='List'>
+        <View theme={myTheme}>
+          <Tabs tabTextColor='blue'>
+            <Content tabLabel='List' tabTextColor='red'>
               <RestaurantsList />
             </Content>
-            <RestaurantsMap tabLabel='Map' />
+            <RestaurantsMap tabLabel='Map' tabTextColor='green' />
           </Tabs>
         </View>
       )

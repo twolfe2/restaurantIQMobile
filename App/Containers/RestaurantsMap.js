@@ -89,7 +89,7 @@ class MapviewExample extends React.Component {
     *************************************************************/
     // <MapCallout location={location} onPress={this.calloutPress} /> 
     return (
-      <MapView.Marker key={location.name} title={location.name} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+      <MapView.Marker key={location.factual_id} title={location.name} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
         
       </MapView.Marker>
     )
