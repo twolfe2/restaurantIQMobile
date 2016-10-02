@@ -18,17 +18,18 @@ export default (api) => {
   // The Worker
   // ----------
 
-  function * worker (searchObj) {
+  function * worker (id) {
     // make the call to the api
-    const response = yield call(api.getRestaurants, searchObj)
+    const response = yield call(api.getOneRestaurant, id)
 
     // success?
     if (response.ok) {
-      const restaurants = response.data;
+      const restaurantInfo = response.data[0];
+      console.log('***restaurantInfo', restaurantInfo);
 
-      yield put(Actions.receiveRestaurants(restaurants))
+      yield put(Actions.receiveRestaurantDetails(restaurantInfo))
     } else {
-      yield put(Actions.receiveRestaurantsFailure())
+      yield put(Actions.receiveRestaurantDetailsFailure())
     }
   }
 
@@ -38,10 +39,10 @@ export default (api) => {
 
   function * watcher () {
     while (true) {
-      const action = yield take(Types.RESTAURANTS_REQUEST)
-      const { searchObj } = action
-      console.log('searchObj', searchObj);
-      yield call(worker, searchObj)
+      const action = yield take(Types.RESTAURANT_DETAILS)
+      const { id } = action
+      console.log('****id*****', id)
+      yield call(worker, id)  
     }
   }
 

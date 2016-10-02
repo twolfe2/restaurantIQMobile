@@ -27,11 +27,15 @@ class RestaurantsList extends React.Component {
     this._renderRow = this._renderRow.bind(this)
   }
   restaurantClicked(restaurantData) {
-    console.log('clicked', restaurantData );
+    console.log('clicked', restaurantData )
+    const {restaurantSelected, restaurantDetails, restaurantDetailsView } = this.props
+    restaurantSelected(restaurantData)
+    restaurantDetails(restaurantData.factual_id)
+    restaurantDetailsView()
   }
   _renderRow (rowData) {
     return (
-      <TouchableOpacity style={styles.row} onPress={() => this.props.restaurantSelected(rowData)}>
+      <TouchableOpacity style={styles.row} onPress={() => this.restaurantClicked(rowData)}>
         <Text style={styles.boldLabel}>{rowData.name}</Text>
         <Text style={styles.label}>{rowData.rating}</Text>
       </TouchableOpacity>
@@ -63,7 +67,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    restaurantSelected: (restaurantObj) => dispatch(Actions.restaurantSelect(restaurantObj))
+    restaurantSelected: (restaurantObj) => dispatch(Actions.restaurantSelect(restaurantObj)),
+    restaurantDetails: (id) => dispatch(Actions.restaurantDetails(id)),
+    restaurantDetailsView: NavigationActions.restaurantDetailsView
   }
 }
 

@@ -4,14 +4,12 @@ import { connect } from 'react-redux'
 import { Container, Content, Tabs, View, Spinner } from 'native-base'
 import Actions from '../Actions/Creators'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import RestaurantsList from './RestaurantsList'
-import RestaurantsMap from './RestaurantsMap'
 import myTheme from '../Themes/NativeBase/myTheme'
 
 // Styles
-import styles from './Styles/RestaurantsViewStyle'
+import styles from './Styles/RestaurantDetailsStyle'
 
-class RestaurantsView extends React.Component {
+class RestaurantDetails extends React.Component {
 
   // constructor (props) {
   //   super(props)
@@ -19,19 +17,19 @@ class RestaurantsView extends React.Component {
   // }
 
   render () {
-    const { searchLoading } = this.props
+    const { detailsLoading } = this.props
     let output = <Content><Spinner color='blue' /></Content>
-    if(!searchLoading) {
+    if(!detailsLoading) {
       output = (
-        <View theme={myTheme}>
-          <Tabs tabTextColor='blue'>
-            <Content tabLabel='List' tabTextColor='red'>
-              <RestaurantsList />
-            </Content>
-            <RestaurantsMap tabLabel='Map' tabTextColor='green' />
-          </Tabs>
-        </View>
-      )
+        <Content>
+          <Text>hello</Text>
+        </Content> 
+
+
+
+
+
+        )
     }
     return (
       <Container style={styles.container}>
@@ -43,7 +41,7 @@ class RestaurantsView extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    searchLoading: state.restaurant.sear
+    detailsLoading: state.restaurant.detailsLoading
   }
 }
 
@@ -52,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantsView)
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantDetails)

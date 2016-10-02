@@ -7,6 +7,7 @@ import NavItems from './NavItems'
 // screens identified by the router
 import SearchScreen from '../Containers/SearchScreen'
 import RestaurantsView from '../Containers/RestaurantsView'
+import RestaurantDetailsView from '../Containers/RestaurantDetails'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -22,6 +23,7 @@ class NavigationRouter extends Component {
           </Scene>
         </Scene>
           <Scene key='restaurantsView' component={RestaurantsView}/>
+          <Scene key='restaurantDetailsView' component={RestaurantDetailsView}/>
       </Router>
     )
   }

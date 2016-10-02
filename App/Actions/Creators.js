@@ -24,6 +24,9 @@ const receiveRestaurants = (restaurants) => ({type: Types.RECEIVE_RESTAURANTS, r
 const receiveRestaurantsFailure = () => ({type: Types.RESTAURANTS_FAILURE})
 
 const restaurantSelect = (restaurantObj) => ({type: Types.RESTAURANT_SELECT, restaurantObj})
+const restaurantDetails = (id) => ({type: Types.RESTAURANT_DETAILS, id})
+const receiveRestaurantDetails = (restaurantInfo) => ({type: Types.RECEIVE_RESTAURANT_DETAILS, restaurantInfo})
+const receiveRestaurantDetailsFailure = () => ({type: Types.RECEIVE_RESTAURANT_DETAILS_FAILURE})
 /**
  Makes available all the action creators we've created.
  */
@@ -40,5 +43,8 @@ export default {
   restaurantsRequest,
   receiveRestaurants,
   receiveRestaurantsFailure,
-  restaurantSelect
+  restaurantSelect,
+  restaurantDetails,
+  receiveRestaurantDetails,
+  receiveRestaurantDetailsFailure
 }
